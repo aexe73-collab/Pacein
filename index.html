@@ -1,0 +1,915 @@
+<!DOCTYPE html><!-- pacein-landing v1773334183 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacein — Move with how you feel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #7A9E8E;
+    --sage-light: #A8C4B8;
+    --sage-dark: #4E7566;
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7DA;
+    --warm-white: #FAF8F4;
+    --charcoal: #2C2C2A;
+    --mist: #C8D8D2;
+    --text-soft: #6B6860;
+    --text-faint: #9E9A94;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,248,244,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,158,142,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; letter-spacing: 0.08em;
+    color: var(--charcoal);
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-logo img { margin-right: 9px; flex-shrink: 0; }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 300; letter-spacing: 0.04em;
+    color: var(--text-soft); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sage-dark); }
+  .nav-cta {
+    background: var(--sage) !important;
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--sage-dark) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 12px 24px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 120%, rgba(122,158,142,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 30%, rgba(168,196,184,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(200,216,210,0.1) 0%, transparent 60%);
+  }
+
+  /* Layered mountain silhouettes */
+  .mountains {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 45%;
+    overflow: hidden;
+  }
+  .mountain-layer {
+    position: absolute; bottom: 0; left: 0; right: 0;
+  }
+  .mountain-layer svg { width: 100%; height: auto; display: block; }
+
+  .hero-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 14vw, 160px);
+    font-weight: 300; line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(122,158,142,0.12);
+    border: 1px solid rgba(122,158,142,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--sage-dark);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--sage);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--charcoal);
+    max-width: 900px;
+    white-space: nowrap;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+
+  .hero-sub {
+    font-size: 18px; font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-soft);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    text-align: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 400; letter-spacing: 0.02em;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(122,158,142,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--sage-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(122,158,142,0.4);
+  }
+
+  .btn-ghost {
+    color: var(--text-soft);
+    font-size: 14px; font-weight: 300; letter-spacing: 0.04em;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+    padding: 16px 0;
+  }
+  .btn-ghost:hover { color: var(--charcoal); }
+  .btn-ghost svg { transition: transform 0.2s; }
+  .btn-ghost:hover svg { transform: translateX(3px); }
+
+  .hero-social-proof {
+    margin-top: 64px;
+    font-size: 13px; color: var(--text-faint); font-weight: 300;
+    letter-spacing: 0.03em;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.1em; color: var(--text-faint);
+    text-transform: uppercase;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+  .scroll-dot {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--sage-light));
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    padding: 140px 24px;
+    max-width: 900px; margin: 0 auto;
+    text-align: center;
+  }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+  }
+  .philosophy-quote em { font-style: italic; color: var(--sage-dark); }
+  .philosophy-body {
+    font-size: 16px; font-weight: 300; line-height: 1.75;
+    color: var(--text-soft); max-width: 560px; margin: 0 auto;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    padding: 80px 24px 140px;
+    background: var(--cream);
+  }
+  .how-inner {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .how-header {
+    text-align: center; margin-bottom: 80px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 15px; font-weight: 300; color: var(--text-soft);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: rgba(122,158,142,0.1);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .step {
+    background: var(--cream);
+    padding: 48px 36px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300;
+    color: rgba(122,158,142,0.2);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--charcoal);
+  }
+  .step-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .step-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(145deg, rgba(200,216,210,0.35), rgba(122,158,142,0.12));
+    border: 1px solid rgba(122,158,142,0.2);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .step-icon svg { width: 22px; height: 22px; }
+
+  /* ── FEATURES ── */
+  .features {
+    padding: 140px 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .features-header { text-align: center; margin-bottom: 80px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    padding: 40px;
+    border: 1px solid rgba(122,158,142,0.15);
+    border-radius: 20px;
+    background: var(--warm-white);
+    transition: all 0.3s;
+  }
+  .feature-card:hover {
+    border-color: var(--sage-light);
+    box-shadow: 0 8px 32px rgba(122,158,142,0.1);
+    transform: translateY(-2px);
+  }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: linear-gradient(145deg, rgba(200,216,210,0.4), rgba(122,158,142,0.1));
+    border: 1px solid rgba(122,158,142,0.18);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    background: linear-gradient(145deg, rgba(122,158,142,0.2), rgba(78,117,102,0.15));
+    border-color: rgba(122,158,142,0.35);
+  }
+  .feature-icon svg { width: 24px; height: 24px; }
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .feature-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 80px 24px 140px;
+    background: linear-gradient(to bottom, var(--cream), var(--warm-white));
+  }
+  .testimonials-inner { max-width: 960px; margin: 0 auto; }
+  .testimonials-header { text-align: center; margin-bottom: 64px; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .testimonial {
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid rgba(122,158,142,0.1);
+    box-shadow: 0 2px 20px rgba(44,44,42,0.04);
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 300; font-style: italic;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+  }
+  .testimonial-author {
+    font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+    color: var(--text-soft);
+  }
+  .testimonial-role {
+    font-size: 12px; color: var(--text-faint); margin-top: 2px;
+  }
+  .stars { color: var(--sage); font-size: 13px; margin-bottom: 16px; }
+
+  /* ── PRICING ── */
+  .pricing {
+    padding: 140px 24px;
+    max-width: 860px; margin: 0 auto;
+    text-align: center;
+  }
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 64px;
+    text-align: left;
+  }
+  @media (max-width: 600px) {
+    .pricing-cards { grid-template-columns: 1fr; }
+  }
+  .pricing-card {
+    border: 1px solid rgba(122,158,142,0.15);
+    border-radius: 24px;
+    padding: 44px 36px;
+    background: var(--warm-white);
+  }
+  .pricing-card.featured {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+  .pricing-card.featured .pricing-price { color: white; }
+  .pricing-card.featured .pricing-feature { color: rgba(255,255,255,0.8); }
+  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.7); }
+  .pricing-tier {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .pricing-card.featured .pricing-tier { color: rgba(255,255,255,0.7); }
+  .pricing-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .pricing-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+  .pricing-period {
+    font-size: 13px; color: var(--text-faint); margin-bottom: 32px;
+  }
+  .pricing-features { list-style: none; margin-bottom: 36px; }
+  .pricing-feature {
+    font-size: 14px; font-weight: 300; color: var(--text-soft);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(122,158,142,0.08);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pricing-card.featured .pricing-feature {
+    border-bottom-color: rgba(255,255,255,0.1);
+  }
+  .pricing-feature::before {
+    content: '✓';
+    color: var(--sage-light);
+    font-size: 13px; flex-shrink: 0;
+  }
+  .pricing-card.featured .pricing-feature::before { color: rgba(255,255,255,0.8); }
+  .btn-pricing {
+    width: 100%; padding: 14px;
+    border-radius: 100px;
+    font-size: 14px; font-weight: 400; letter-spacing: 0.03em;
+    cursor: pointer; border: none; transition: all 0.2s;
+    text-align: center;
+  }
+  .btn-pricing-outline {
+    background: transparent;
+    border: 1px solid rgba(122,158,142,0.3);
+    color: var(--sage-dark);
+  }
+  .btn-pricing-outline:hover { background: rgba(122,158,142,0.08); }
+  .btn-pricing-white {
+    background: white;
+    color: var(--sage-dark);
+  }
+  .btn-pricing-white:hover { background: var(--cream); }
+
+  /* ── EARLY ACCESS ── */
+  .early-access {
+    padding: 140px 24px;
+    background: var(--cream);
+    text-align: center;
+  }
+  .early-access-inner {
+    max-width: 900px; margin: 0 auto;
+  }
+  .early-access .section-title { margin-bottom: 16px; }
+  .early-access-wordmark {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 20vw, 200px);
+    font-weight: 300; line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: #2C2C2A;
+  }
+  .early-access-founding {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #4E7566;
+    background: rgba(122,158,142,0.1);
+    border: 1px solid rgba(122,158,142,0.25);
+    border-radius: 100px;
+    padding: 7px 18px;
+    margin-bottom: 48px;
+  }
+  .early-access-founding::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7A9E8E;
+    flex-shrink: 0;
+  }
+  .early-access p {
+    font-size: 16px; font-weight: 300; color: var(--text-soft);
+    line-height: 1.7; margin-bottom: 48px;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .email-form {
+    display: flex; gap: 10px; flex-wrap: nowrap; justify-content: center;
+    max-width: 480px; margin: 0 auto;
+  }
+  .email-input {
+    flex: 1; min-width: 240px;
+    padding: 14px 22px;
+    border: 1px solid rgba(122,158,142,0.25);
+    border-radius: 100px;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .hero-email-form { margin-top: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .email-input:focus { border-color: var(--sage); }
+  .email-input::placeholder { color: var(--text-faint); }
+  .founding-note {
+    margin-top: 20px;
+    font-size: 12px; color: var(--text-faint); font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px 48px;
+    border-top: 1px solid rgba(122,158,142,0.12);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; letter-spacing: 0.08em;
+  }
+  .footer-logo span { color: var(--sage); }
+  .footer-tagline {
+    font-size: 13px; color: var(--text-faint); font-weight: 300;
+    margin-top: 4px;
+  }
+  .footer-links {
+    display: flex; gap: 28px;
+  }
+  .footer-links a {
+    font-size: 13px; color: var(--text-faint); text-decoration: none;
+    font-weight: 300; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--sage); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 1100px; margin: 0 auto;
+    height: 1px; background: rgba(122,158,142,0.1);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="data:image/png;base64,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" width="28" height="28" alt="Pacein icon" style="border-radius:6px;margin-right:9px;flex-shrink:0;">
+    <span style="color:var(--charcoal)">Pace</span><span style="color:var(--sage)">in</span>
+  </div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#early-access" class="nav-cta">Get early access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="mountains">
+    <div class="mountain-layer" style="bottom:0; opacity:0.06">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,320 L0,180 L120,140 L240,160 L360,100 L480,130 L600,80 L720,110 L840,70 L960,100 L1080,60 L1200,90 L1320,50 L1440,80 L1440,320 Z" fill="#4E7566"/>
+      </svg>
+    </div>
+    <div class="mountain-layer" style="bottom:0; opacity:0.08">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,320 L0,200 L180,160 L360,190 L540,140 L720,170 L900,120 L1080,155 L1260,110 L1440,140 L1440,320 Z" fill="#7A9E8E"/>
+      </svg>
+    </div>
+    <div class="mountain-layer" style="bottom:0; opacity:0.1">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,320 L0,240 L240,210 L480,230 L720,190 L960,215 L1200,185 L1440,210 L1440,320 Z" fill="#A8C4B8"/>
+      </svg>
+    </div>
+    <div class="mountain-layer" style="bottom:0; opacity:0.07">
+      <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,180 L0,140 L360,110 L720,125 L1080,100 L1440,118 L1440,180 Z" fill="#C8D8D2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div style="position:relative; z-index:2; width:100%; display:flex; flex-direction:column; align-items:center; text-align:center;">
+    <div class="hero-wordmark"><span style="color:#2C2C2A">Pace</span><span style="color:#7A9E8E">in</span></div>
+    <h1 class="hero-headline">Move with <em>how you feel.</em></h1>
+    <p class="hero-sub">A calm, adaptive movement companion that meets you where you are — not where you think you should be.</p>
+    <div class="hero-email-form email-form">
+      <input type="email" class="email-input" placeholder="Your email address">
+      <button class="btn-primary" onclick="handleSignup(this)">Join waitlist</button>
+    </div>
+    <p class="hero-social-proof">Built for the ones who know exercise helps — and still can't always manage it.</p>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="hero-badge" style="margin-bottom:20px;">Now accepting founding members</div>
+    <div class="scroll-dot"></div>
+    scroll
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy reveal">
+  <p class="section-eyebrow">Our philosophy</p>
+  <h2 class="philosophy-quote">"Consistency doesn't mean<br><em>showing up at your best.</em><br>It means showing up."</h2>
+  <p class="philosophy-body">Most fitness apps are built around pushing you harder. Pacein is different. It asks how you feel first — then builds your day around that answer. No guilt. No streaks to protect. Just movement that makes sense for today.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-title">Five minutes of honesty.<br>A day of movement.</h2>
+      <p class="section-sub">No planning required. Just check in and Pacein handles the rest.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v2M5.5 5.5l1.4 1.4M18.5 5.5l-1.4 1.4M3 12h2M19 12h2"/>
+            <path d="M5 17a7 7 0 0 1 14 0"/>
+            <line x1="3" y1="20" x2="21" y2="20"/>
+          </svg>
+        </div>
+        <div class="step-title">Morning check-in</div>
+        <p class="step-body">A gentle notification asks how you're feeling. No right answer — just honest ones. Low, meh, good, or energised.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2c0 5-3 8-3 10s3 5 3 10c0-5 3-8 3-10S12 7 12 2z"/>
+            <path d="M2 12c5 0 8 3 10 3s5-3 10-3c-5 0-8-3-10-3S7 12 2 12z"/>
+          </svg>
+        </div>
+        <div class="step-title">Adaptive session</div>
+        <p class="step-body">Pacein generates a personalised 5–30 minute movement session that matches your energy and time today.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="1.5"/>
+            <path d="M9 12c0-1.5 1-3 3-3s3 1.5 3 3"/>
+            <path d="M7 14c1 2 2.5 4 5 5 2.5-1 4-3 5-5"/>
+            <path d="M9 17l-2 4M15 17l2 4"/>
+          </svg>
+        </div>
+        <div class="step-title">Calm guidance</div>
+        <p class="step-body">Move through your session with clear, unhurried guidance. No countdown pressure. No performance metrics.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 0-9-9 9 9 0 0 0-6.36 2.64"/>
+            <path d="M3 12a9 9 0 0 0 9 9 9 9 0 0 0 6.36-2.64"/>
+            <polyline points="6 6 6 3 3 3"/>
+            <polyline points="18 18 18 21 21 21"/>
+          </svg>
+        </div>
+        <div class="step-title">It learns & adapts</div>
+        <p class="step-body">After each session, Pacein quietly learns your patterns and makes tomorrow's plan a little more you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header reveal">
+    <p class="section-eyebrow">Features</p>
+    <h2 class="section-title">Everything it needs.<br>Nothing it doesn't.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="12" cy="12" r="1" fill="#7A9E8E"/>
+        </svg>
+      </div>
+      <div class="feature-title">Mood-based sessions</div>
+      <p class="feature-body">Each day's movement is generated around how you actually feel — not an arbitrary schedule someone else made.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h2l2-6 3 12 2-8 2 4h3"/>
+          <path d="M19 12h2"/>
+        </svg>
+      </div>
+      <div class="feature-title">AI that listens</div>
+      <p class="feature-body">The more you use Pacein, the better it understands your patterns. Your energy cycles, your busy weeks, your best hours.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="13" width="4" height="8" rx="1"/>
+          <rect x="10" y="8" width="4" height="13" rx="1"/>
+          <rect x="17" y="4" width="4" height="17" rx="1"/>
+        </svg>
+      </div>
+      <div class="feature-title">Insight dashboard</div>
+      <p class="feature-body">See your movement patterns over time. Not to judge — but to understand yourself better and notice what actually helps.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </div>
+      <div class="feature-title">Smart notifications</div>
+      <p class="feature-body">Reminders that respect your energy. Pacein learns the best time to reach you — and backs off when you need space.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <polyline points="12 7 12 12 15.5 15.5"/>
+        </svg>
+      </div>
+      <div class="feature-title">5–30 min sessions</div>
+      <p class="feature-body">Short enough to always be possible. Long enough to always be meaningful. The session fits your day, not the other way around.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A9E8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          <line x1="9" y1="10" x2="15" y2="10"/>
+          <line x1="9" y1="13" x2="13" y2="13"/>
+        </svg>
+      </div>
+      <div class="feature-title">Calm voice & tone</div>
+      <p class="feature-body">No "crush it" energy here. Pacein speaks like a thoughtful friend — observant, gentle, and genuinely on your side.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <p class="section-eyebrow">Early feedback</p>
+      <h2 class="section-title">What people are saying</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I've tried every fitness app. This is the first one that doesn't make me feel like I've failed when I have a bad week."</p>
+        <div class="testimonial-author">Sarah M.</div>
+        <div class="testimonial-role">Product manager, 34</div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The check-in takes 10 seconds and somehow makes the rest of the day feel more intentional. Strange but true."</p>
+        <div class="testimonial-author">James L.</div>
+        <div class="testimonial-role">Founder, 41</div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Finally an app that accepts I'm not always going to be a 10/10. The low-energy sessions have kept me consistent for 3 months."</p>
+        <div class="testimonial-author">Priya K.</div>
+        <div class="testimonial-role">Designer, 29</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="reveal">
+    <p class="section-eyebrow">Pricing</p>
+    <h2 class="section-title">Simple. Honest. Affordable.</h2>
+    <p class="section-sub">Start free. Upgrade when it's worth it to you.</p>
+  </div>
+  <div class="pricing-cards reveal">
+    <div class="pricing-card">
+      <div class="pricing-tier">Free forever</div>
+      <div class="pricing-name">Pacein</div>
+      <div class="pricing-price">£0</div>
+      <div class="pricing-period">No credit card needed</div>
+      <ul class="pricing-features">
+        <li class="pricing-feature">Daily mood check-in</li>
+        <li class="pricing-feature">One adaptive session per day</li>
+        <li class="pricing-feature">Sessions up to 15 minutes</li>
+        <li class="pricing-feature">Basic progress view</li>
+      </ul>
+      <button class="btn-pricing btn-pricing-outline">Start free</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Most popular</div>
+      <div class="pricing-name">Pacein Plus</div>
+      <div class="pricing-price">£7</div>
+      <div class="pricing-period">per month · or £59/year</div>
+      <ul class="pricing-features">
+        <li class="pricing-feature">Everything in free</li>
+        <li class="pricing-feature">Sessions up to 30 minutes</li>
+        <li class="pricing-feature">Weekly adaptive planning</li>
+        <li class="pricing-feature">Full insights dashboard</li>
+        <li class="pricing-feature">Smarter AI personalisation</li>
+        <li class="pricing-feature">Priority smart notifications</li>
+      </ul>
+      <button class="btn-pricing btn-pricing-white">Get Pacein Plus</button>
+    </div>
+  </div>
+</section>
+
+<!-- EARLY ACCESS -->
+<section class="early-access" id="early-access">
+  <div class="early-access-inner">
+    <p class="section-eyebrow">Early access</p>
+    <h2 class="section-title">Be a founding member.</h2>
+    <p>Join the waitlist and get lifetime discounted pricing, early access to new features, and the chance to shape how Pacein grows.</p>
+    <div class="email-form">
+      <input type="email" class="email-input" placeholder="Your email address">
+      <button class="btn-primary" onclick="handleSignup(this)">Join waitlist</button>
+    </div>
+    <p class="founding-note">No spam. No pressure. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><span style="color:var(--charcoal)">Pace</span><span style="color:var(--sage)">in</span>
+    </div>
+    <div class="footer-tagline">Consistency over intensity.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.05) + 's';
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Email signup
+  function handleSignup(btn) {
+    const input = btn.previousElementSibling;
+    if (!input.value || !input.value.includes('@')) {
+      input.style.borderColor = '#e07070';
+      input.focus();
+      return;
+    }
+    btn.textContent = '✓ You\'re on the list';
+    btn.style.background = '#4E7566';
+    input.disabled = true;
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
