@@ -94,7 +94,11 @@
   .mountain-layer {
     position: absolute; bottom: 0; left: 0; right: 0;
   }
-  .mountain-layer svg { width: 100%; height: auto; display: block; }
+  .mountain-layer svg { width: 100%; height: 100%; display: block; }
+  @media (max-width: 600px) {
+    .mountains { height: 35%; }
+    .mountain-layer svg { height: auto; min-height: 80px; }
+  }
 
   .hero-wordmark {
     font-family: 'Cormorant Garamond', serif;
@@ -669,6 +673,62 @@
   .reveal.visible {
     opacity: 1; transform: translateY(0);
   }
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 16px 20px; }
+
+    /* Hero */
+    .hero { padding: 80px 20px 90px; }
+    .hero-wordmark { font-size: clamp(52px, 18vw, 120px); margin-bottom: 14px; }
+    .hero-wordmark img { width: 48px !important; height: 48px !important; border-radius: 10px !important; margin-bottom: 14px !important; }
+    .hero-headline { font-size: clamp(24px, 7vw, 48px); white-space: normal; }
+    .hero-sub { font-size: 15px; }
+    .hero-email-form { flex-direction: column; gap: 10px; }
+    .hero-email-form .email-input { min-width: unset; width: 100%; }
+    .hero-email-form .btn-primary { width: 100%; text-align: center; }
+    .hero-social-proof { font-size: 12px; margin-top: 40px; }
+
+    /* App preview phones */
+    .app-preview { padding: 80px 20px; }
+    .phones-row { gap: 24px; }
+    .phone-frame { width: 180px; height: 360px; border-radius: 30px; padding: 10px; }
+    .phone-screen { padding: 16px 13px 13px; }
+    .phone-notch { width: 48px; }
+
+    /* Philosophy */
+    .philosophy { padding: 80px 20px; }
+    .philosophy-quote { font-size: clamp(22px, 6vw, 40px); }
+    .philosophy-body { font-size: 14px; }
+
+    /* How it works */
+    .how { padding: 80px 20px; }
+    .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+    .section-title { font-size: clamp(26px, 7vw, 48px); }
+
+    /* Features */
+    .features { padding: 80px 20px; }
+    .features-grid { grid-template-columns: 1fr; gap: 16px; }
+    .feature-card { padding: 24px; }
+
+    /* Testimonials */
+    .testimonials { padding: 80px 20px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    /* Pricing */
+    .pricing { padding: 80px 20px; }
+    .pricing-card { padding: 32px 24px; }
+
+    /* Early access CTA */
+    .early-access { padding: 80px 20px; }
+    .email-form { flex-direction: column; gap: 10px; max-width: 100%; }
+    .email-input { min-width: unset; width: 100%; }
+    .btn-primary { width: 100%; text-align: center; }
+
+    /* Footer */
+    footer { padding: 40px 20px; flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -687,23 +747,23 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="mountains">
-    <div class="mountain-layer" style="bottom:0; opacity:0.06">
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="mountain-layer" style="bottom:0; opacity:0.06; height:55%;">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
         <path d="M0,320 L0,180 L120,140 L240,160 L360,100 L480,130 L600,80 L720,110 L840,70 L960,100 L1080,60 L1200,90 L1320,50 L1440,80 L1440,320 Z" fill="#4E7566"/>
       </svg>
     </div>
-    <div class="mountain-layer" style="bottom:0; opacity:0.08">
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="mountain-layer" style="bottom:0; opacity:0.08; height:50%;">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
         <path d="M0,320 L0,200 L180,160 L360,190 L540,140 L720,170 L900,120 L1080,155 L1260,110 L1440,140 L1440,320 Z" fill="#7A9E8E"/>
       </svg>
     </div>
-    <div class="mountain-layer" style="bottom:0; opacity:0.1">
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="mountain-layer" style="bottom:0; opacity:0.1; height:40%;">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
         <path d="M0,320 L0,240 L240,210 L480,230 L720,190 L960,215 L1200,185 L1440,210 L1440,320 Z" fill="#A8C4B8"/>
       </svg>
     </div>
-    <div class="mountain-layer" style="bottom:0; opacity:0.07">
-      <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="mountain-layer" style="bottom:0; opacity:0.07; height:28%;">
+      <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
         <path d="M0,180 L0,140 L360,110 L720,125 L1080,100 L1440,118 L1440,180 Z" fill="#C8D8D2"/>
       </svg>
     </div>
